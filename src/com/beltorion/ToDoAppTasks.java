@@ -55,4 +55,15 @@ public class ToDoAppTasks {
         }
     }
 
+    static void removeTask() {
+        try {
+            Path filePath = Paths.get("src/com/beltorion/todolist");
+            List<String> lines = Files.readAllLines(filePath);
+            lines.remove(1);
+            Files.write(filePath, lines);
+        } catch (IOException e) {
+            System.out.println("Unable to read file: todolist.txt");
+        }
+    }
+
 }

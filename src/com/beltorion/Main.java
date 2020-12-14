@@ -17,7 +17,7 @@ public class Main {
         } else if ((args[0].equals("-a"))) {
             ToDoAppTasks.addTask();
         } else if ((args[0].equals("-r"))) {
-            System.out.println("Remove task");
+            ToDoAppTasks.removeTask();
         } else if ((args[0].equals("-c"))) {
             System.out.println("complete task");
         } else {
