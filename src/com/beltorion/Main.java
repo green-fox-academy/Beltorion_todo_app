@@ -15,7 +15,7 @@ public class Main {
         } else if ((args[0].equals("-l"))) {
             ToDoAppTasks.listTasks();
         } else if ((args[0].equals("-a"))) {
-            System.out.println("New task");
+            ToDoAppTasks.addTask();
         } else if ((args[0].equals("-r"))) {
             System.out.println("Remove task");
         } else if ((args[0].equals("-c"))) {
@@ -23,12 +23,6 @@ public class Main {
         } else {
             System.out.println("not valid argument");
         }
-    }
-
-
-    private static void addTask(){
-
-
     }
 
 }
