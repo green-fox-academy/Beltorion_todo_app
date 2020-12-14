@@ -27,17 +27,20 @@ public class Main {
 
     private static void listTasks() throws IOException {
         try {
-            Path filePath = Paths.get("src/todoapp/todolist");
+            Path filePath = Paths.get("src/com/beltorion/todolist");
             List<String> lines = Files.readAllLines(filePath);
-            int lineNumber = 1;
-            for (String line : lines) {
-                System.out.println(lineNumber + ". " + line);
-                lineNumber++;
+            if (lines.isEmpty()) {
+                System.out.println("Nincs mára tennivalód! :)");
+            }else {
+                int lineNumber = 1;
+                for (String line : lines) {
+                    System.out.println(lineNumber + ". " + line);
+                    lineNumber++;
+                }
             }
         } catch (IOException e) {
             System.out.println("Unable to read file: todolist.txt");
         }
-
     }
 
     private static void userManual() {
