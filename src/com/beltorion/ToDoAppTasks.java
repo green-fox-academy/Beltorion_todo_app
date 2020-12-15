@@ -1,16 +1,16 @@
 package com.beltorion;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.List;
-import java.util.Scanner;
 
 public class ToDoAppTasks {
 
-    static void listTasks() throws IOException {
+    static void listTasks() {
         try {
             Path filePath = Paths.get("src/com/beltorion/todolist");
             List<String> lines = Files.readAllLines(filePath);
@@ -39,27 +39,24 @@ public class ToDoAppTasks {
                 "    -c   Teljesít egy feladatot.");
     }
 
-    static void addTask() {
-        Scanner scanner = new Scanner(System.in);
-        String taskToAdd = "\r" + scanner.nextLine();
-        if (taskToAdd.length() == 1) {
-            System.out.println("Nem lehetséges új feladat hozzáadása: nincs megadva a feladat!");
-        } else {
-            try {
-                Path filePath = Paths.get("src/com/beltorion/todolist");
-                Files.write(filePath, taskToAdd.getBytes(), StandardOpenOption.APPEND);
-                System.out.println("Task has been added to your list");
-            } catch (Exception e) {
-                System.out.println("Could not write the file!");
-            }
+    static void addTask(String args) {
+        try {
+            Path filePath = Paths.get("src/com/beltorion/todolist");
+            FileWriter fileWriter = new FileWriter(String.valueOf(filePath), true);
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+            printWriter.println(args);
+            printWriter.close();
+            System.out.println("Task has been added to your list");
+        } catch (Exception e) {
+            System.out.println("Could not write the file!");
         }
     }
 
-    static void removeTask() {
+    static void removeTask(String args) {
         try {
             Path filePath = Paths.get("src/com/beltorion/todolist");
             List<String> lines = Files.readAllLines(filePath);
-            lines.remove(1);
+            lines.remove(Integer.parseInt(args)-1);
             Files.write(filePath, lines);
         } catch (IOException e) {
             System.out.println("Unable to read file: todolist.txt");
