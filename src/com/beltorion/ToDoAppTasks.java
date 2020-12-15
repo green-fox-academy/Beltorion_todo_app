@@ -28,24 +28,15 @@ public class ToDoAppTasks {
         }
     }
 
-    static void userManual() {
-        System.out.println("\nParancssori Todo applikáció\n" +
-                "=============================\n" +
-                "\n" +
-                "Parancssori argumentumok:\n" +
-                "    -l   Kilistázza a feladatokat\n" +
-                "    -a   Új feladatot ad hozzá\n" +
-                "    -r   Eltávolít egy feladatot\n" +
-                "    -c   Teljesít egy feladatot.");
-    }
-
     static void addTask(String args) {
         try {
+
             Path filePath = Paths.get("src/com/beltorion/todolist");
-            FileWriter fileWriter = new FileWriter(String.valueOf(filePath), true);
-            PrintWriter printWriter = new PrintWriter(fileWriter);
-            printWriter.println(args);
-            printWriter.close();
+            List<String> lines = Files.readAllLines(filePath);
+            lines.add(args);
+            Files.write(filePath, lines);
+
+
             System.out.println("Task has been added to your list");
         } catch (Exception e) {
             System.out.println("Could not write the file!");
@@ -61,6 +52,27 @@ public class ToDoAppTasks {
         } catch (IOException e) {
             System.out.println("Unable to read file: todolist.txt");
         }
+    }
+    static void completeTask(String args) {
+        try {
+            Path filePath = Paths.get("src/com/beltorion/todolist");
+            List<String> lines = Files.readAllLines(filePath);
+            //lines.remove(Integer.parseInt(args)-1);
+            Files.write(filePath, lines);
+        } catch (IOException e) {
+            System.out.println("Unable to read file: todolist.txt");
+        }
+    }
+
+    static void userManual() {
+        System.out.println("\nParancssori Todo applikáció\n" +
+                "=============================\n" +
+                "\n" +
+                "Parancssori argumentumok:\n" +
+                "    -l   Kilistázza a feladatokat\n" +
+                "    -a   Új feladatot ad hozzá\n" +
+                "    -r   Eltávolít egy feladatot\n" +
+                "    -c   Teljesít egy feladatot.");
     }
 
 }
