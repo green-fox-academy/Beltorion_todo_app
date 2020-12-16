@@ -1,8 +1,6 @@
 package com.beltorion;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -33,9 +31,8 @@ public class ToDoAppTasks {
 
             Path filePath = Paths.get("src/com/beltorion/todolist");
             List<String> lines = Files.readAllLines(filePath);
-            lines.add(args);
+            lines.add("[ ] " + args);
             Files.write(filePath, lines);
-
 
             System.out.println("Task has been added to your list");
         } catch (Exception e) {
@@ -47,17 +44,21 @@ public class ToDoAppTasks {
         try {
             Path filePath = Paths.get("src/com/beltorion/todolist");
             List<String> lines = Files.readAllLines(filePath);
-            lines.remove(Integer.parseInt(args)-1);
+            lines.remove(Integer.parseInt(args) - 1);
             Files.write(filePath, lines);
         } catch (IOException e) {
             System.out.println("Unable to read file: todolist.txt");
         }
     }
+
     static void completeTask(String args) {
         try {
             Path filePath = Paths.get("src/com/beltorion/todolist");
             List<String> lines = Files.readAllLines(filePath);
-            //lines.remove(Integer.parseInt(args)-1);
+            String taskDone = lines.get(Integer.parseInt(args) - 1);
+            taskDone = taskDone.replace("[ ] ", "[X] ");
+            lines.remove(Integer.parseInt(args) - 1);
+            lines.add(Integer.parseInt(args) - 1, taskDone);
             Files.write(filePath, lines);
         } catch (IOException e) {
             System.out.println("Unable to read file: todolist.txt");
