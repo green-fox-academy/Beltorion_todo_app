@@ -3,11 +3,6 @@ package com.beltorion;
 public class ToDos {
 
    private String task;
-
-   public void setTask(String task) {
-      this.task = task;
-   }
-
    Boolean isTaskCompleted;
 
    public ToDos(String task) {

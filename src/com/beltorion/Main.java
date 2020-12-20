@@ -12,10 +12,10 @@ public class Main {
             ToDoAppTasks.listTasks();
         } else if (args[0].equals("-a") && args.length > 1) {
             ToDoAppTasks.addTask(args[1]);
-        } else if (args[0].equals("-r")&& args.length > 1) {
+        } else if (args[0].equals("-r") && args.length > 1) {
             ToDoAppTasks.removeTask(args[1]);
-        } else if (args[0].equals("-c")) {
-            System.out.println("complete task");
+        } else if (args[0].equals("-c") && args.length > 1) {
+            ToDoAppTasks.completeTask(args[1]);
         } else if (args.length == 1 && (args[0].equals("-r") || args[0].equals("-c") || args[0].equals("-a"))) {
             System.out.println("Please give a task or index");
         } else {

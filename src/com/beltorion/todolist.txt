@@ -1,0 +1,3 @@
+[ ] Gyakorolni a feladatokat
+[ ] Bevásárolni
+[X] Rendet rakni

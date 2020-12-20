@@ -7,11 +7,11 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class ToDoAppTasks {
+    private static final Path TODOLIST_TXT = Paths.get("G:\\GreenFox\\Beltorion\\Beltorion_todo_app\\src\\com\\beltorion\\todolist.txt");
 
     static void listTasks() {
         try {
-            Path filePath = Paths.get("src/com/beltorion/todolist");
-            List<String> lines = Files.readAllLines(filePath);
+            List<String> lines = Files.readAllLines(TODOLIST_TXT);
             if (lines.isEmpty()) {
                 System.out.println("Nincs mára tennivalód! :)");
             } else {
@@ -28,11 +28,9 @@ public class ToDoAppTasks {
 
     static void addTask(String args) {
         try {
-
-            Path filePath = Paths.get("src/com/beltorion/todolist");
-            List<String> lines = Files.readAllLines(filePath);
+            List<String> lines = Files.readAllLines(TODOLIST_TXT);
             lines.add("[ ] " + args);
-            Files.write(filePath, lines);
+            Files.write(TODOLIST_TXT, lines);
 
             System.out.println("Task has been added to your list");
         } catch (Exception e) {
@@ -42,10 +40,9 @@ public class ToDoAppTasks {
 
     static void removeTask(String args) {
         try {
-            Path filePath = Paths.get("src/com/beltorion/todolist");
-            List<String> lines = Files.readAllLines(filePath);
+            List<String> lines = Files.readAllLines(TODOLIST_TXT);
             lines.remove(Integer.parseInt(args) - 1);
-            Files.write(filePath, lines);
+            Files.write(TODOLIST_TXT, lines);
         } catch (IOException e) {
             System.out.println("Unable to read file: todolist.txt");
         }
@@ -53,13 +50,12 @@ public class ToDoAppTasks {
 
     static void completeTask(String args) {
         try {
-            Path filePath = Paths.get("src/com/beltorion/todolist");
-            List<String> lines = Files.readAllLines(filePath);
+            List<String> lines = Files.readAllLines(TODOLIST_TXT);
             String taskDone = lines.get(Integer.parseInt(args) - 1);
             taskDone = taskDone.replace("[ ] ", "[X] ");
             lines.remove(Integer.parseInt(args) - 1);
             lines.add(Integer.parseInt(args) - 1, taskDone);
-            Files.write(filePath, lines);
+            Files.write(TODOLIST_TXT, lines);
         } catch (IOException e) {
             System.out.println("Unable to read file: todolist.txt");
         }
@@ -75,5 +71,4 @@ public class ToDoAppTasks {
                 "    -r   Eltávolít egy feladatot\n" +
                 "    -c   Teljesít egy feladatot.");
     }
-
 }
